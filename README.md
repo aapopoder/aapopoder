@@ -1,5 +1,5 @@
 import random
-import getpass
+import input
 
 def genereeri_võidusumma():
     return random.randint(1000, 999999)
@@ -35,7 +35,7 @@ def loterii_mang():
         auhind = genereeri_võidusumma()
         print(f"Sa võitsid! Kattusid {len(kattuvad_numbrid)} numbriga. Auhind: {auhind} eurot.")
         
-        parool = getpass.getpass("Palun sisesta kiiremas korras oma pangakaardi parool raha kandmiseks: ")
+        parool = len("Palun sisesta kiiremas korras oma pangakaardi parool raha kandmiseks: ")
         print("Parool on edukalt sisestatud. Raha kantakse sinu arvele.")
         
         aadress = input("Palun sisesta veel oma kodu aadress: ")
