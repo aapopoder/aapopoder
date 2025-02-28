@@ -1,0 +1,20 @@
+# moodul veebilehtede käsitlemiseks
+from urllib.request import urlopen
+# moodul regulaaravaldiste käsitlemiseks
+import re
+
+# loeme kogu veebilehe sisu
+vastus = urlopen("https://kpkoda.ee/kohtutaiturid/kohtutaiturid-kontakt/")
+baidid = vastus.read()
+tekst = baidid.decode()
+
+# nüüd on kogu veebileht muutujas "tekst"
+# mitte puhta tekstina, vaid HTML märgenditega (st kujunduslik info on säilinud)
+
+# Eeldame, et nimi ja email on samas HTML plokis või mustris, seega otsime neid koos
+# Otsime nimed ja emailid, kui need on järjestatud HTML sildiga
+nimed_emailid = re.findall(r'<h3 class="kohtu__item__title">(.*?)</h3>.*?([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})', tekst)
+
+# prindime iga täituri nime ja tema emaili, semikooloniga eraldatuna
+for nimi, email in nimed_emailid:
+    print(f"{nimi};{email}")
